@@ -20,7 +20,15 @@
 - (IBAction)doLogout:(id)sender
 {
     [[BLManager sharedManager] userLogout];
-    [self performSegueWithIdentifier:@"Logout" sender:sender];
+    //[self performSegueWithIdentifier:@"Logout" sender:sender];
+    
+    //此方法防止堆栈过长
+    NSString *storyboardName = @"Login";
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[UIApplication sharedApplication].delegate  setWindow:window];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    window.rootViewController = [storyboard instantiateInitialViewController];
+    [window makeKeyAndVisible];
 }
 
 @end
