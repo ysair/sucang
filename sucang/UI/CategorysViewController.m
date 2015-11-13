@@ -12,7 +12,8 @@
 #import "CategoryCell.h"
 #import "ViewCategoryViewController.h"
 
-@interface CategorysViewController () <UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout> {
+@interface CategorysViewController () <UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+{
     BLCategory *_categoryAdd;
     NSMutableArray *_nullCategorys;
 }
@@ -34,17 +35,18 @@
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"CategoryCell"];
 
     // 下拉刷新
+    __block CategorysViewController *blockself = self;
     self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
     {
         [[BLManager sharedManager] dateGetCategorysWithSuccess:^
         {
-            [self.collectionView.header endRefreshing];
-            [self.collectionView reloadData];
-            self.labelNullInfo.hidden = [BLManager sharedManager].categorys.count > 0;
+            [blockself.collectionView.header endRefreshing];
+            [blockself.collectionView reloadData];
+            blockself.labelNullInfo.hidden = [BLManager sharedManager].categorys.count > 0;
         }
                                                        failure:^(NSError *error)
         {
-            [self.collectionView.header endRefreshing];
+            [blockself.collectionView.header endRefreshing];
         }];
     }];
     

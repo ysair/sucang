@@ -80,8 +80,8 @@
                                     <outlet property="delegate" destination="iG4-dY-j07" id="Lek-gm-o4M"/>
                                 </connections>
                             </collectionView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请添加类别" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKN-Vn-RDU">
-                                <rect key="frame" x="153" y="220" width="110" height="27"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请添加类别" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKN-Vn-RDU">
+                                <rect key="frame" x="152" y="220" width="110" height="27"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -613,6 +613,6 @@
         <image name="tabRefer" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YZK-vN-0K3"/>
+        <segue reference="Qsz-Jf-VAj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -41,18 +41,19 @@
     _headerData.mark = @"标记";
 
     // 下拉刷新
+    __block ViewItemViewController* blockself = self;
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
     {
         [[BLManager sharedManager] dataGetItemDetailWithItem:self.item
                                                      success:^
          {
-             [self.tableView.header endRefreshing];
-             [self updateControls];
-             [self.tableView reloadData];
+             [blockself.tableView.header endRefreshing];
+             [blockself updateControls];
+             [blockself.tableView reloadData];
          }
                                                      failure:^(NSError *error)
          {
-             [self.tableView.header endRefreshing];
+             [blockself.tableView.header endRefreshing];
          }];
     }];
     

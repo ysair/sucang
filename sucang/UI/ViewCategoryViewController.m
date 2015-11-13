@@ -31,6 +31,7 @@
     self.tableView.rowHeight = 40;
     
     // 下拉刷新
+    __block ViewCategoryViewController* blockself = self;
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
     {
         [[BLManager sharedManager] dataGetItemsWithCategory:self.category
@@ -38,12 +39,12 @@
                                                       count:0
                                                     success:^
         {
-            [self.tableView.header endRefreshing];
-            [self.tableView reloadData];
+            [blockself.tableView.header endRefreshing];
+            [blockself.tableView reloadData];
         }
                                                     failure:^(NSError *error)
         {
-            [self.tableView.header endRefreshing];
+            [blockself.tableView.header endRefreshing];
         }];
     }];
     

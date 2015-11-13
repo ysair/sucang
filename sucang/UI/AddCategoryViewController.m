@@ -49,6 +49,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     [self.textFieldName becomeFirstResponder];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
@@ -62,25 +64,6 @@
     if (self.barButtonDone.enabled)
         [self doneClick:self.barButtonDone];
     return YES;
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
-    
-    if ([segue.identifier isEqualToString:@"AddCategorySuccess"])
-    {
-        ((ViewCategoryViewController *)segue.destinationViewController).category = sender;
-    }
-}
-
-- (IBAction)nameChanged:(id)sender
-{
-    self.barButtonDone.enabled = ![self.textFieldName.text isEqualToString:@""];
 }
 
 - (IBAction)doneClick:(id)sender
@@ -97,13 +80,12 @@
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          //UINavigationController *nc = self.navigationController;
          //[self.navigationController popViewControllerAnimated:NO];
-         //[((CategorysViewController *)nc.topViewController) viewCategory:category];
          [self performSegueWithIdentifier:@"AddCategorySuccess" sender:category];
          NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
          [arr removeObjectAtIndex:1];
          [self.navigationController setViewControllers:arr animated:NO];
      }
-                                            failure:^(NSError *error)
+                                                    failure:^(NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          [[[UIAlertView alloc] initWithTitle:@"错误"
@@ -113,6 +95,25 @@
                            otherButtonTitles:nil] show];
      }];
     
+}
+
+- (IBAction)nameChanged:(id)sender
+{
+    self.barButtonDone.enabled = ![self.textFieldName.text isEqualToString:@""];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+    
+    if ([segue.identifier isEqualToString:@"AddCategorySuccess"])
+    {
+        ((ViewCategoryViewController *)segue.destinationViewController).category = sender;
+    }
 }
 
 #pragma mark -- UICollectionViewDataSource
